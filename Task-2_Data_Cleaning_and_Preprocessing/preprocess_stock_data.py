@@ -14,7 +14,12 @@ df = df.dropna(subset=['date'])  # Drop rows where date couldn't be parsed
 df.set_index('date', inplace=True)
 
 # Step 2: Handle missing values
-df = df.interpolate(method='time')
+df = df.infer_objects(copy=False)  # Try converting object columns if possible
+
+# Interpolate only numeric columns (prevents warnings from non-numeric ones)
+df[df.select_dtypes(include=[np.number]).columns] = df.select_dtypes(include=[np.number]).interpolate(method='time')
+
+
 
 # Step 3: Detect and remove outliers using Isolation Forest
 iso = IsolationForest(contamination=0.01, random_state=42)
@@ -33,7 +38,12 @@ cols_to_scale = ['open', 'high', 'low', 'close', 'volume']
 df[cols_to_scale] = scaler.fit_transform(df[cols_to_scale])
 
 # Save the final cleaned data
-df.to_csv("stock_data_cleaned.csv", index=True, float_format='%.4f')
+# Optional: Keep only last 1000 rows (or less if needed)
+df = df.tail(1000)
+
+# Save with reduced precision to lower file size
+df.to_csv("stock_data_cleaned.csv", index=True, float_format="%.4f")
+
 
 
 print("✅ Preprocessing complete! Cleaned data saved as 'stock_data_cleaned.csv'")
