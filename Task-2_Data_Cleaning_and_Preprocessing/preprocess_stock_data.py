@@ -33,6 +33,7 @@ cols_to_scale = ['open', 'high', 'low', 'close', 'volume']
 df[cols_to_scale] = scaler.fit_transform(df[cols_to_scale])
 
 # Save the final cleaned data
-df.to_csv("stock_data_cleaned.csv")
+df.to_csv("stock_data_cleaned.csv", index=True, float_format='%.4f')
+
 
 print("✅ Preprocessing complete! Cleaned data saved as 'stock_data_cleaned.csv'")
