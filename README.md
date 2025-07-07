@@ -1,4 +1,7 @@
-# 📊 Data Science Project: Web Scraping, Cleaning, and EDA
+# 📊 Level 1 (Beginner) Data Science Tasks : Web Scraping, Cleaning, and EDA
+# Organization : CODVEDA 
+# Role : Data Science Intern
+
 
 ## 🚀 Project Overview
 This project demonstrates a complete data science workflow from data collection to exploratory analysis. It consists of three main tasks that cover the essential steps of any data analysis project.
