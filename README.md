@@ -1,5 +1,5 @@
 # 📊 Level 1 (Beginner) Data Science Tasks : Web Scraping, Cleaning, and EDA
-# Organization : CODVEDA 
+# Organization : Codveda Technologies
 # Role : Data Science Intern
 
 
