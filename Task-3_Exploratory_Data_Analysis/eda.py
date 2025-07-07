@@ -1,6 +1,3 @@
-# ======================
-# 1. IMPORT LIBRARIES
-# ======================
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -11,9 +8,7 @@ from scipy import stats
 sns.set(style="whitegrid")
 plt.rcParams['figure.figsize'] = (12, 6)
 
-# ======================
-# 2. LOAD & FIX DATA
-# ======================
+
 # Load with whitespace separation
 df = pd.read_csv("C:/Users/aryan/Desktop/CODVED/Task-3_Exploratory_Data_Analysis/house_prediction_data.csv",
     header=None,
@@ -28,18 +23,14 @@ columns = [
 ]
 df.columns = columns
 
-# ======================
-# 3. DATA QUALITY CHECK
-# ======================
+
 print("=== DATA PROFILE ===")
 print(f"Shape: {df.shape}")
 print("\nData Types:\n", df.dtypes)
 print("\nMissing Values:\n", df.isnull().sum())
 print("\nDescriptive Stats:\n", df.describe().T)
 
-# ======================
-# 4. UNIVARIATE ANALYSIS
-# ======================
+
 # Histograms for all features
 df.hist(bins=30, figsize=(18, 15))
 plt.tight_layout()
@@ -51,9 +42,7 @@ sns.histplot(df['MEDV'], kde=True, bins=30)
 plt.title('Distribution of Home Prices (MEDV)')
 plt.show()
 
-# ======================
-# 5. BIVARIATE ANALYSIS
-# ======================
+
 # Correlation matrix
 corr = df.corr()
 mask = np.triu(np.ones_like(corr, dtype=bool))
@@ -77,9 +66,7 @@ plot_scatter('RM', 'MEDV')  # Rooms vs Price
 plot_scatter('LSTAT', 'MEDV')  # Poverty vs Price
 plot_scatter('PTRATIO', 'MEDV')  # Student-Teacher Ratio vs Price
 
-# ======================
-# 6. OUTLIER DETECTION
-# ======================
+
 # Boxplots for key features
 plt.figure(figsize=(12, 6))
 sns.boxplot(data=df[['CRIM', 'RM', 'LSTAT', 'MEDV']])
@@ -92,18 +79,14 @@ z_scores = np.abs(stats.zscore(df.select_dtypes(include=[np.number])))
 outliers = (z_scores > 3).any(axis=1)
 print(f"\nNumber of outliers detected: {outliers.sum()}")
 
-# ======================
-# 7. CATEGORICAL ANALYSIS
-# ======================
+
 # Charles River dummy variable
 plt.figure(figsize=(8, 5))
 sns.boxplot(x='CHAS', y='MEDV', data=df)
 plt.title("Price Comparison: Near Charles River (1) vs Not (0)")
 plt.show()
 
-# ======================
-# 8. ADVANCED ANALYSIS
-# ======================
+
 # Price by RAD (accessibility to radial highways)
 plt.figure(figsize=(12, 6))
 sns.boxplot(x='RAD', y='MEDV', data=df)
@@ -116,9 +99,7 @@ sns.scatterplot(x='NOX', y='MEDV', data=df, alpha=0.6)
 plt.title("Air Pollution vs Home Prices")
 plt.show()
 
-# ======================
-# 9. FINAL INSIGHTS
-# ======================
+
 print("\n=== KEY FINDINGS ===")
 print("1. Strong positive correlation between RM (rooms) and price")
 print("2. Strong negative correlation between LSTAT (poverty) and price")
